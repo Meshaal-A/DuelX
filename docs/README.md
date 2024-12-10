@@ -1,6 +1,5 @@
 
 
-```markdown
 # Street Fighter
 
 **Street Fighter** is an engaging two-player fighting game built with Python and Pygame. This project features exciting gameplay mechanics, unique characters, and dynamic animations, making it a perfect choice for retro game enthusiasts and developers interested in Python-based game development.
