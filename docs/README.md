@@ -1,4 +1,4 @@
-Here’s an expanded version of your `README` with a more detailed description of the features and how they work, including information about the levels and game progression.
+
 
 ```markdown
 # Street Fighter
