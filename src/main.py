@@ -46,8 +46,8 @@ bg_image = cv2.imread(resource_path("assets/images/bg1.jpg"))
 bg_image_level2 = cv2.imread(resource_path("assets/images/bg2.jpg"))
 bg_image_level3 = cv2.imread(resource_path("assets/images/bg3.jpg"))
 victory_img = pygame.image.load(resource_path("assets/images/victory.png")).convert_alpha()
-warrior_victory_img = pygame.image.load(resource_path("assets/images/warrior.png")).convert_alpha()
-wizard_victory_img = pygame.image.load(resource_path("assets/images/wizard.png")).convert_alpha()
+warrior_victory_img = pygame.image.load(resource_path("assets/images/victorywarrior.webp")).convert_alpha()
+wizard_victory_img = pygame.image.load(resource_path("assets/images/victorywizard.webp")).convert_alpha()
 
 # Fonts
 menu_font = pygame.font.Font(resource_path("assets/fonts/turok.ttf"), 50)
@@ -114,38 +114,41 @@ def draw_button(text, font, text_col, button_col, x, y, width, height):
     screen.blit(text_img, text_rect)
     return pygame.Rect(x, y, width, height)
 
-import pygame
-
-# Initialize pygame
-pygame.init()
-
-# Ensure the mixer is initialized before using sound
-pygame.mixer.init()
-
 def victory_screen(winner_img):
     # Load victory sound
-    victory_sound = pygame.mixer.Sound("assets/audio/victory_sound.mp3")  # Ensure the sound file is in the assets folder
-    victory_sound.play()  # Play the sound when the victory screen starts
-    
-    # Load the victory background image (victory.png)
-    victory_bg = pygame.image.load("assets/images/victory.png")  # Ensure the image exists in this path
-    
-    start_time = pygame.time.get_ticks()
-    
-    while pygame.time.get_ticks() - start_time < ROUND_OVER_COOLDOWN:
-        # Fill the screen with the victory background image
-        screen.fill((0, 0, 0))  # Clear screen before drawing new content
-        screen.blit(victory_bg, (0, 0))  # Fill the screen with the victory background
-        
-        # Resize the winner image if necessary (you can adjust size here, e.g., 200x200 pixels)
-        resized_victory_img = pygame.transform.scale(winner_img, (200, 200))  # Resize to a fixed size (e.g., 200x200)
-        
-        # Blit (draw) the resized winner image in the center of the screen
-        screen.blit(resized_victory_img, 
-                    (SCREEN_WIDTH // 2 - resized_victory_img.get_width() // 2, 
-                     SCREEN_HEIGHT // 2 - resized_victory_img.get_height() // 2))
+    try:
+        victory_sound = pygame.mixer.Sound("assets/audio/victory_sound.mp3")  # Ensure the sound file exists
+        victory_sound.play()  # Play the sound
+    except pygame.error:
+        print("Error: Victory sound file missing or invalid.")  # Debug message if sound file fails
 
-        # Update the display to show the changes
+    # Resize the winner's image to match the screen dimensions
+    resized_winner_img = pygame.transform.scale(winner_img, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    # Load a more game-like font (assuming you have a game font in your assets)
+    try:
+        victory_font = pygame.font.Font("assets/fonts/game_font.ttf", 200)  # Larger, game-style font
+    except:
+        # Fallback to default font if custom font fails
+        victory_font = pygame.font.Font(None, 200)
+
+    # Create the victory text with a more dramatic look
+    victory_text = victory_font.render("VICTORY", True, (255, 215, 0))  # Gold color for more impact
+    
+    # Get the rectangle for the text and center it exactly in the middle of the screen
+    text_rect = victory_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
+    # Timer setup
+    start_time = pygame.time.get_ticks()
+
+    while pygame.time.get_ticks() - start_time < ROUND_OVER_COOLDOWN:
+        # Draw the resized winner image as the background
+        screen.blit(resized_winner_img, (0, 0))  # (0, 0) is the top-left corner
+
+        # Draw the victory text
+        screen.blit(victory_text, text_rect)
+
+        # Update the display
         pygame.display.update()
 
         # Event handling (e.g., quit)
@@ -153,9 +156,6 @@ def victory_screen(winner_img):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
-    # Stop the victory sound after the cooldown period
-    victory_sound.stop()
 
 def draw_gradient_text(text, font, x, y, colors):
     """
