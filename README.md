@@ -144,9 +144,4 @@ If you have any questions or need further assistance, reach out to the maintaine
 - **Email**: [mishalayubkhan10@gmail.com](mailto:mishalayubkhan10@gmail.com)
 ```
 
-### Key Updates:
-- Expanded features, including detailed descriptions for each level and game mechanics.
-- Special abilities and combo system added to increase the depth of gameplay.
-- Clear instructions for contributing and additional installation steps.
 
-This version gives a more comprehensive view of your project and its functionalities. Let me know if you'd like further updates or changes!
