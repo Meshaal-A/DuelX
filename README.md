@@ -1,8 +1,8 @@
 
 
-# Street Fighter
+# DuelX
 
-**Street Fighter** is an engaging two-player fighting game built with Python and Pygame. This project features exciting gameplay mechanics, unique characters, and dynamic animations, making it a perfect choice for retro game enthusiasts and developers interested in Python-based game development.
+**DuelX** is an engaging two-player fighting game built with Python and Pygame. This project features exciting gameplay mechanics, unique characters, and dynamic animations, making it a perfect choice for retro game enthusiasts and developers interested in Python-based game development.
 
 ## Features
 ### **Two Distinct Fighters**
@@ -99,7 +99,7 @@ Follow these steps to install and run the game:
 - The goal is to reduce your opponent's health to zero to win the round. The game includes multiple rounds, and the first player to win the majority of rounds wins the match. Victory is celebrated with a dynamic win screen!
 
 ## Downloads
-You can download the latest release of **Street Fighter** from the following link:
+You can download the latest release of **DuelX** from the following link:
 
 [![Version](https://img.shields.io/github/v/release/Meshaal-A/DuelX?color=%230567ff&label=Latest%20Release&style=for-the-badge)](https://github.com/Meshaal-A/DuelX/releases/latest) 
 
@@ -144,9 +144,4 @@ If you have any questions or need further assistance, reach out to the maintaine
 - **Email**: [mishalayubkhan10@gmail.com](mailto:mishalayubkhan10@gmail.com)
 ```
 
-### Key Updates:
-- Expanded features, including detailed descriptions for each level and game mechanics.
-- Special abilities and combo system added to increase the depth of gameplay.
-- Clear instructions for contributing and additional installation steps.
 
-This version gives a more comprehensive view of your project and its functionalities. Let me know if you'd like further updates or changes!
