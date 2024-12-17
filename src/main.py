@@ -42,12 +42,12 @@ pygame.display.set_caption("Street Fighter")
 clock = pygame.time.Clock()
 
 # Load Assets
-bg_image = cv2.imread(resource_path("assets/images/bg1.jpg"))
-bg_image_level2 = cv2.imread(resource_path("assets/images/bg2.jpg"))
-bg_image_level3 = cv2.imread(resource_path("assets/images/bg3.jpg"))
+bg_image = cv2.imread(resource_path("assets/images/bg4.jpg"))
+bg_image_level2 = cv2.imread(resource_path("assets/images/bg6.jpg"))
+bg_image_level3 = cv2.imread(resource_path("assets/images/bg5.jpg"))
 victory_img = pygame.image.load(resource_path("assets/images/victory.png")).convert_alpha()
-warrior_victory_img = pygame.image.load(resource_path("assets/images/victorywarrior.webp")).convert_alpha()
-wizard_victory_img = pygame.image.load(resource_path("assets/images/victorywizard.webp")).convert_alpha()
+warrior_victory_img = pygame.image.load(resource_path("assets/images/victorywar.webp")).convert_alpha()
+wizard_victory_img = pygame.image.load(resource_path("assets/images/victorywiz.webp")).convert_alpha()
 
 # Fonts
 menu_font = pygame.font.Font(resource_path("assets/fonts/turok.ttf"), 50)
@@ -127,7 +127,7 @@ def victory_screen(winner_img):
 
     # Load a more game-like font (assuming you have a game font in your assets)
     try:
-        victory_font = pygame.font.Font("assets/fonts/game_font.ttf", 200)  # Larger, game-style font
+        victory_font = pygame.font.Font("assets/fonts/turok.ttf", 200)  # Larger, game-style font
     except:
         # Fallback to default font if custom font fails
         victory_font = pygame.font.Font(None, 200)
@@ -166,26 +166,31 @@ def draw_gradient_text(text, font, x, y, colors):
         img = font.render(text, True, color)
         screen.blit(img, (x + i * offset, y + i * offset))
 
+# Main menu function
 def main_menu():
     animation_start_time = pygame.time.get_ticks()
 
     while True:
+        screen.fill((0, 0, 0))  # Clear screen (replace this with your background image draw function)
         draw_bg(bg_image, is_game_started=False)
 
+        # Title animation (scaling effect)
         elapsed_time = (pygame.time.get_ticks() - animation_start_time) / 1000
         scale_factor = 1 + 0.05 * math.sin(elapsed_time * 2 * math.pi)  # Slight scaling
-        scaled_font = pygame.font.Font(resource_path("assets/fonts/turok.ttf"), int(100 * scale_factor))
+        scaled_font = pygame.font.Font("assets/fonts/turok.ttf", int(100 * scale_factor))
 
         title_text = "STREET FIGHTER"
-        colors = [BLUE, GREEN, YELLOW]
+        colors = [RED, BLACK, RED]
         shadow_color = BLACK
         title_x = SCREEN_WIDTH // 2 - scaled_font.size(title_text)[0] // 2
         title_y = SCREEN_HEIGHT // 6
 
+        # Add shadow and gradient title
         shadow_offset = 5
         draw_text(title_text, scaled_font, shadow_color, title_x + shadow_offset, title_y + shadow_offset)
         draw_gradient_text(title_text, scaled_font, title_x, title_y, colors)
 
+        # Button dimensions and positions
         button_width = 280
         button_height = 60
         button_spacing = 30
@@ -194,11 +199,12 @@ def main_menu():
         scores_button_y = SCREEN_HEIGHT // 2 - (button_height + button_spacing) * 0.5 + 50
         exit_button_y = SCREEN_HEIGHT // 2 + (button_height + button_spacing) * 0.5 + 50
 
-        start_button = draw_button("START GAME", menu_font, BLACK, GREEN, SCREEN_WIDTH // 2 - button_width // 2,
+        # Draw buttons
+        start_button = draw_button("START GAME", menu_font, BLACK, RED, SCREEN_WIDTH // 2 - button_width // 2,
                                    start_button_y, button_width, button_height)
-        scores_button = draw_button("SCORES", menu_font, BLACK, GREEN, SCREEN_WIDTH // 2 - button_width // 2,
+        scores_button = draw_button("SCORES", menu_font, BLACK, RED, SCREEN_WIDTH // 2 - button_width // 2,
                                     scores_button_y, button_width, button_height)
-        exit_button = draw_button("EXIT", menu_font, BLACK, GREEN, SCREEN_WIDTH // 2 - button_width // 2,
+        exit_button = draw_button("EXIT", menu_font, BLACK, RED, SCREEN_WIDTH // 2 - button_width // 2,
                                   exit_button_y, button_width, button_height)
 
         for event in pygame.event.get():
